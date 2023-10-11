@@ -8,7 +8,7 @@ from web3.types import (
     TxReceipt
 )
 
-from .types import (
+from .typez import (
     AddressLike, 
     Address
 )

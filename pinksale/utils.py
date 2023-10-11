@@ -8,7 +8,7 @@ from web3.types import (
     TxReceipt
 )
 
-from .types import AddressLike
+from .typez import AddressLike
 
 
 def _get_abi(ca_type: str) -> dict:
