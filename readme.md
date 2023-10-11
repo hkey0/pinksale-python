@@ -10,6 +10,13 @@ The unofficial Python client for [Pinksale](https://pinksale.finance).
 - Easy access to the necessary data about the presale.
 - Supports BSC and ETH for now.
 
+
+# Installation 
+
+```
+pip install pinksale-python
+```
+
 #### Supports
 - Binance Smart Chain
     - Supports ETH (BNB)
