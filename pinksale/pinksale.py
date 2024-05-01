@@ -20,7 +20,7 @@ from .utils import (
     _sign_and_send_transaction
 )
 from .decorators import (
-    needs_private_key
+    requires_private_key
 )
 
 class Pinksale:
@@ -85,9 +85,7 @@ class Pinksale:
         return tx_receipt
 
 
-    def get_pool_owner(
-        self
-    ) -> Address:
+    def get_pool_owner(self) -> Address:
         return self.pinksale_ca.functions.owner().call()
     
 
@@ -105,27 +103,21 @@ class Pinksale:
         return self.pinksale_ca.functions.contributionOf(address).call()
 
 
-    @needs_private_key
-    def claim(
-        self 
-    ) -> TxReceipt:
+    @requires_private_key
+    def claim(self) -> TxReceipt:
         transaction = self.pinksale_ca.functions.claim()
         tx_receipt  = _sign_and_send_transaction(self.w3, 0, transaction, self.address, self.private_key)
         return tx_receipt
 
 
-    @needs_private_key
-    def emergency_withdraw(
-        self,
-    ) -> TxReceipt:
+    @requires_private_key
+    def emergency_withdraw(self) -> TxReceipt:
         transaction = self.pinksale_ca.functions.emergencyWithdrawContribution()
         tx_receipt  = _sign_and_send_transaction(self.w3, 0, transaction, self.address, self.private_key)
         return tx_receipt
 
 
-    def get_contributor_count(
-        self
-    ) -> int:
+    def get_contributor_count(self) -> int:
         return self.pinksale_ca.functions.getContributorCount().call()
     
 
@@ -137,8 +129,6 @@ class Pinksale:
         return self.pinksale_ca.functions.getContributors(start_index, end_index).call()
 
     
-    def get_all_contributors(
-        self
-    ) -> list:
+    def get_all_contributors(self) -> list:
         start, end = 0, self.get_contributor_count()
         return self.pinksale_ca.functions.getContributors(start, end).call()
