@@ -49,14 +49,12 @@ class Pinksale:
             "kyc": json.loads(data[-1])
         }
     
-
     def get_pool_settings(
         self
     ) -> dict:
         data = self.pinksale_ca.functions.poolSettings().call()
         keys = ["token", "currency", "start_time", "end_time", "soft_cap", "total_selling_tokens", "max_contribution", "unknown"]
         return dict(zip(keys, data)) # I don't understand what the last parameter means
-
 
     @needs_private_key
     def contribute(
@@ -73,16 +71,13 @@ class Pinksale:
         )
         return tx_receipt
 
-
     def get_pool_owner(self) -> Address:
         return self.pinksale_ca.functions.owner().call()
     
-
     def get_current_rate(
         self
     ) -> int:
         return self.pinksale_ca.functions.currentRate().call()
-    
 
     def get_contribution_of(
         self,
@@ -91,13 +86,11 @@ class Pinksale:
         address = Web3.to_checksum_address(address)
         return self.pinksale_ca.functions.contributionOf(address).call()
 
-
     @requires_private_key
     def claim(self) -> TxReceipt:
         transaction = self.pinksale_ca.functions.claim()
         tx_receipt  = _sign_and_send_transaction(self.w3, 0, transaction, self.address, self.private_key)
         return tx_receipt
-
 
     @requires_private_key
     def emergency_withdraw(self) -> TxReceipt:
@@ -105,10 +98,8 @@ class Pinksale:
         tx_receipt  = _sign_and_send_transaction(self.w3, 0, transaction, self.address, self.private_key)
         return tx_receipt
 
-
     def get_contributor_count(self) -> int:
         return self.pinksale_ca.functions.getContributorCount().call()
-    
 
     def get_contributors(
         self,
@@ -116,7 +107,6 @@ class Pinksale:
         end_index: int
     ) -> list:
         return self.pinksale_ca.functions.getContributors(start_index, end_index).call()
-
     
     def get_all_contributors(self) -> list:
         start, end = 0, self.get_contributor_count()
