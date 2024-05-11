@@ -1,33 +1,22 @@
 import json
-from typing import (
-    Optional
-)
+from typing import Optional
 
 from web3 import Web3, Account
-from web3.types import (
-    TxReceipt
-)
+from web3.types import TxReceipt
 
-from .typez import (
-    AddressLike, 
-    Address
-)
-from .constants import (
-    ZERO_ADDRESS
-)
+from .typez import AddressLike, Address
+from .constants import ZERO_ADDRESS
 from .utils import (
     _load_contract,
     _sign_and_send_transaction
 )
-from .decorators import (
-    requires_private_key
-)
+from .decorators import requires_private_key
 
 class Pinksale:
     def __init__(
         self,
         contract: AddressLike,
-        private_key:  Optional[str] = None,
+        private_key: Optional[str] = None,
         provider: Optional[str] = None,
         web3: Optional[Web3] = None,
     ) -> None:
