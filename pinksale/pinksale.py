@@ -37,8 +37,8 @@ class Pinksale:
             self.private_key = private_key
             self.address     = Account.from_key(self.private_key).address
         else:
-            self.private_key = None
-    
+            self.private_key = None 
+
     def get_pool_details(
         self
     ) -> dict:
@@ -56,10 +56,10 @@ class Pinksale:
         keys = ["token", "currency", "start_time", "end_time", "soft_cap", "total_selling_tokens", "max_contribution", "unknown"]
         return dict(zip(keys, data)) # I don't understand what the last parameter means
 
-    @needs_private_key
+    @requires_private_key
     def contribute(
         self,
-        amount: int or float
+        amount: int | float
     ) -> TxReceipt: 
         transaction = self.pinksale_ca.functions.contribute(0, ZERO_ADDRESS)
         tx_receipt = _sign_and_send_transaction(
